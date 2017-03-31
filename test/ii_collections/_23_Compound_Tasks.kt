@@ -1,6 +1,8 @@
 package ii_collections
 
 import ii_collections.data.*
+import ii_collections.shopBuilders.customer
+import ii_collections.shopBuilders.order
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -10,12 +12,12 @@ class _23_Compound_Tasks {
     }
 
     @Test fun testMostExpensiveDeliveredProduct() {
-        val testShop = shop("test shop for 'most expensive delivered product'",
-                customer(lucas, Canberra,
-                        order(isDelivered = false, products = idea),
-                        order(reSharper)
-                )
-        )
+        val testShop = ii_collections.shopBuilders.shop("test shop for 'most expensive delivered product'") {
+            customer(lucas, Canberra) {
+                order(isDelivered = false, products = idea)
+                order(reSharper)
+            }
+        }
         assertEquals(reSharper, testShop.customers[0].getMostExpensiveDeliveredProduct())
     }
 
